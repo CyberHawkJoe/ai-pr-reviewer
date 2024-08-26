@@ -22,7 +22,7 @@ import {getTokenCount} from './tokenizer'
 const context = github_context
 const repo = context.repo
 
-const ignoreKeyword = '@ai: ignore'
+const ignoreKeyword = '@cyberhawk-ai: ignore'
 
 export const codeReview = async (
   lightBot: Bot,
@@ -714,16 +714,16 @@ ${
 <details>
 <summary>Tips</summary>
 
-### Chat with <img src="https://avatars.githubusercontent.com/u/62384270?s=41&v=4" alt="Image description" width="20" height="20">  AI Review Bot (\`@ai\`)
+### Chat with <img src="https://avatars.githubusercontent.com/u/62384270?s=41&v=4" alt="Image description" width="20" height="20">  AI Review Bot (\`@cyberhawk-ai\`)
 - Reply on review comments left by this bot to ask follow-up questions. A review comment is a comment on a diff or a file.
-- Invite the bot into a review comment chain by tagging \`@ai\` in a reply.
+- Invite the bot into a review comment chain by tagging \`@cyberhawk-ai\` in a reply.
 
 ### Code suggestions
 - The bot may make code suggestions, but please review them carefully before committing since the line number ranges may be misaligned.
 - You can edit the comment made by the bot and manually tweak the suggestion if it is slightly off.
 
 ### Pausing incremental reviews
-- Add \`@ai: ignore\` anywhere in the PR description to pause further reviews from the bot.
+- Add \`@cyberhawk-ai: ignore\` anywhere in the PR description to pause further reviews from the bot.
 
 </details>
 `
