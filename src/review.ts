@@ -23,6 +23,7 @@ const context = github_context
 const repo = context.repo
 
 const ignoreKeyword = '@cyberhawk-ai: ignore'
+const reviewKeyword = '@cyberhawk-ai: review'
 
 export const codeReview = async (
   lightBot: Bot,
@@ -46,6 +47,22 @@ export const codeReview = async (
   }
   if (context.payload.pull_request == null) {
     warning('Skipped: context.payload.pull_request is null')
+    return
+  }
+
+  const {data: pullRequest} = await octokit.rest.pulls.get({
+    owner: repo.owner,
+    repo: repo.repo,
+    pull_number: context.payload.pull_request.number
+  })
+
+  // Check for large PR
+  const isLargePR = pullRequest.commits > 10 || pullRequest.changed_files > 100
+  const descriptionContainsReviewKeyword =
+    pullRequest.body?.includes(reviewKeyword) ?? false
+
+  if (isLargePR && !descriptionContainsReviewKeyword) {
+    warning('Skipped: PR is too large and does not contain the review keyword')
     return
   }
 
